@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPark - Intelligent Parking Finder & Booking System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #1e3c72;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #2a5298;
+            padding-bottom: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 8px rgba(42, 82, 152, 0.2);
+        }
+
+        .slider-group {
+            margin-bottom: 15px;
+        }
+
+        .slider-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #2a5298;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #2a5298;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 10px 15px;
+            background: #f0f0f0;
+            color: #1e3c72;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chip:hover {
+            background: #e0e0e0;
+        }
+
+        .chip.active {
+            background: #2a5298;
+            color: white;
+            border-color: #2a5298;
+        }
+
+        .main-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .results-count {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .sort-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .parking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .parking-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .parking-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            border-color: #2a5298;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9ff 100%);
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 8px;
+        }
+
+        .card-location {
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .availability-bar {
+            margin-bottom: 15px;
+        }
+
+        .availability-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .availability-label .available {
+            color: #4caf50;
+        }
+
+        .availability-label .total {
+            color: #666;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
+            border-radius: 4px;
+        }
+
+        .card-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 700;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .card-price {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2a5298;
+        }
+
+        .card-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .amenity-badge {
+            font-size: 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 8px;
+            border-radius: 12px;
+            border: 1px solid #a5d6a7;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-book {
+            flex: 1;
+            padding: 10px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(42, 82, 152, 0.3);
+        }
+
+        .booking-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 30px;
+            display: none;
+        }
+
+        .booking-panel.active {
+            display: block;
+        }
+
+        .booking-panel h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2a5298;
+            padding-bottom: 10px;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .booking-summary {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .total-cost {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #2a5298;
+        }
+
+        .total-cost-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e3c72;
+        }
+
+        .total-cost-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2a5298;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-busy {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-full {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .parking-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .parking-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span style="font-size: 28px;">🅿️</span>SmartPark</h1>
+            <p class="subtitle">Intelligent Parking Availability & Booking Interface - Find, Reserve & Park with Confidence</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h2>🔍 Search Parking</h2>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="location">📍 Location/Area</label>
+                        <input type="text" id="location" placeholder="Enter area name...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">📅 Date</label>
+                        <input type="date" id="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="entryTime">⏱️ Entry Time</label>
+                        <input type="time" id="entryTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exitTime">🕐 Exit Time</label>
+                        <input type="time" id="exitTime">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-value">
+                            <label>💰 Max Price: </label>
+                            <span id="priceValue" style="font-weight: 600; color: #2a5298;">₹500</span>
+                        </div>
+                        <input type="range" id="maxPrice" min="50" max="500" value="500" step="25" onchange="updatePrice()">
+                    </div>
+
+                    <button class="btn-primary" onclick="searchParking()">Search Parking</button>
+                </div>
+
+                <div class="form-section">
+                    <h3 style="color: #1e3c72; font-size: 14px; margin-bottom: 10px;">🎁 Amenities</h3>
+                    <div class="filter-chips" id="amenityChips"></div>
+                </div>
+
+                <div class="form-section">
+                    <h3 style="color: #1e3c72; font-size: 14px; margin-bottom: 10px;">ℹ️ Info</h3>
+                    <div style="background: #f0f4ff; padding: 12px; border-radius: 6px; font-size: 13px; color: #1e3c72;">
+                        📍 <strong>Current Location:</strong> Sector 5, Downtown<br>
+                        🕐 <strong>Current Time:</strong> <span id="currentTime"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="map-container">
+                    🗺️ Interactive Map - Parking Locations
+                </div>
+
+                <div class="results-header">
+                    <div class="results-count" id="resultCount">📌 Click Search to find parking</div>
+                    <div class="sort-controls">
+                        <button class="btn-secondary" onclick="sortBy('distance')">📏 Distance</button>
+                        <button class="btn-secondary" onclick="sortBy('price')">💰 Price</button>
+                    </div>
+                </div>
+
+                <div id="parkingResults"></div>
+            </div>
+        </div>
+
+        <!-- Booking Panel -->
+        <div class="booking-panel" id="bookingPanel">
+            <h3>🎫 Complete Your Booking</h3>
+            <div class="booking-form">
+                <div class="form-group">
+                    <label>Parking Spot</label>
+                    <input type="text" id="bookingSpot" readonly style="background: #f0f0f0;">
+                </div>
+                <div class="form-group">
+                    <label>Vehicle Number</label>
+                    <input type="text" id="vehicleNo" placeholder="DL-01-AB-1234">
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="bookingName" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="bookingPhone" placeholder="(555) 123-4567">
+                </div>
+            </div>
+
+            <div class="booking-summary">
+                <div class="summary-item">
+                    <span class="summary-label">Entry Time:</span>
+                    <span class="summary-value" id="summaryEntry">---</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Exit Time:</span>
+                    <span class="summary-value" id="summaryExit">---</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Duration:</span>
+                    <span class="summary-value" id="summaryDuration">---</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Rate:</span>
+                    <span class="summary-value" id="summaryRate">---</span>
+                </div>
+                <div class="total-cost">
+                    <span class="total-cost-label">Total Cost:</span>
+                    <span class="total-cost-value" id="summaryTotal">₹0</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" style="margin-top: 20px; width: 100%; padding: 15px;" onclick="confirmBooking()">
+                ✓ Confirm Booking
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const parkingLots = [
+            {
+                id: 1,
+                name: "Downtown Plaza Parking",
+                location: "Sector 5, Downtown",
+                distance: 0.3,
+                hourlyRate: 50,
+                dailyRate: 400,
+                totalSpaces: 120,
+                availableSpaces: 45,
+                amenities: ["24/7 Surveillance", "EV Charging", "Car Wash"],
+                rating: 4.7
+            },
+            {
+                id: 2,
+                name: "Central Commercial Hub",
+                location: "Central Avenue",
+                distance: 0.8,
+                hourlyRate: 40,
+                dailyRate: 300,
+                totalSpaces: 200,
+                availableSpaces: 120,
+                amenities: ["Free WiFi", "Handicap Accessible"],
+                rating: 4.5
+            },
+            {
+                id: 3,
+                name: "Business District Garage",
+                location: "Business Park",
+                distance: 1.2,
+                hourlyRate: 60,
+                dailyRate: 450,
+                totalSpaces: 300,
+                availableSpaces: 80,
+                amenities: ["24/7 Surveillance", "EV Charging", "Car Wash", "Free WiFi"],
+                rating: 4.8
+            },
+            {
+                id: 4,
+                name: "Mall Parking Complex",
+                location: "Shopping District",
+                distance: 1.5,
+                hourlyRate: 35,
+                dailyRate: 250,
+                totalSpaces: 400,
+                availableSpaces: 250,
+                amenities: ["Shopping Access", "Handicap Accessible"],
+                rating: 4.4
+            },
+            {
+                id: 5,
+                name: "Airport Gateway Parking",
+                location: "Near Airport",
+                distance: 2.0,
+                hourlyRate: 75,
+                dailyRate: 500,
+                totalSpaces: 150,
+                availableSpaces: 30,
+                amenities: ["24/7 Surveillance", "Airport Shuttle"],
+                rating: 4.6
+            }
+        ];
+
+        const amenities = [
+            { id: 1, name: "24/7 Surveillance", emoji: "📹" },
+            { id: 2, name: "EV Charging", emoji: "⚡" },
+            { id: 3, name: "Car Wash", emoji: "🚗" },
+            { id: 4, name: "Free WiFi", emoji: "📶" },
+            { id: 5, name: "Handicap Accessible", emoji: "♿" }
+        ];
+
+        let selectedAmenities = [];
+        let currentBooking = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDate();
+            initializeAmenities();
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+        });
+
+        function initializeDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+        }
+
+        function initializeAmenities() {
+            const container = document.getElementById('amenityChips');
+            container.innerHTML = amenities.map(a => `
+                <div class="chip" onclick="toggleAmenity(${a.id}, this)">${a.emoji} ${a.name}</div>
+            `).join('');
+        }
+
+        function toggleAmenity(id, element) {
+            element.classList.toggle('active');
+            if (selectedAmenities.includes(id)) {
+                selectedAmenities = selectedAmenities.filter(a => a !== id);
+            } else {
+                selectedAmenities.push(id);
+            }
+        }
+
+        function updatePrice() {
+            const value = document.getElementById('maxPrice').value;
+            document.getElementById('priceValue').textContent = '₹' + value;
+        }
+
+        function updateCurrentTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = 
+                now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+        }
+
+        function searchParking() {
+            const location = document.getElementById('location').value;
+            const maxPrice = parseInt(document.getElementById('maxPrice').value);
+            
+            let results = parkingLots;
+            
+            if (location) {
+                results = results.filter(lot => 
+                    lot.location.toLowerCase().includes(location.toLowerCase()) ||
+                    lot.name.toLowerCase().includes(location.toLowerCase())
+                );
+            }
+            
+            results = results.filter(lot => lot.hourlyRate <= maxPrice);
+            
+            if (selectedAmenities.length > 0) {
+                results = results.filter(lot => {
+                    const selectedNames = selectedAmenities.map(id => 
+                        amenities.find(a => a.id === id).name
+                    );
+                    return selectedNames.every(name => lot.amenities.includes(name));
+                });
+            }
+
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            const container = document.getElementById('parkingResults');
+            const countDiv = document.getElementById('resultCount');
+
+            if (results.length === 0) {
+                container.innerHTML = '<div class="empty-state">No parking found matching your criteria. Try adjusting your filters.</div>';
+                countDiv.textContent = '📌 No results found';
+                return;
+            }
+
+            countDiv.textContent = `📌 Found ${results.length} parking location${results.length !== 1 ? 's' : ''}`;
+
+            container.innerHTML = results.map(lot => `
+                <div class="parking-card">
+                    <div class="card-header">
+                        <div class="card-title">${lot.name}</div>
+                        <div class="card-location">📍 ${lot.location} • ${lot.distance} km</div>
+                        <div style="margin-top: 8px;">
+                            <span class="status-badge ${getAvailabilityStatus(lot)}">
+                                ${lot.availableSpaces} of ${lot.totalSpaces} available
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="availability-bar">
+                            <div class="availability-label">
+                                <span>Space Availability</span>
+                                <span class="available">${lot.availableSpaces} spaces</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${(lot.availableSpaces/lot.totalSpaces)*100}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-info">
+                            <div class="info-item">
+                                <div class="info-label">Hourly Rate</div>
+                                <div class="info-value">₹${lot.hourlyRate}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Daily Rate</div>
+                                <div class="info-value">₹${lot.dailyRate}</div>
+                            </div>
+                        </div>
+
+                        <div class="card-amenities">
+                            ${lot.amenities.map(a => `
+                                <span class="amenity-badge">${getAmenityEmoji(a)} ${a}</span>
+                            `).join('')}
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="font-size: 14px; color: #666;">⭐ ${lot.rating}/5</span>
+                            <span style="font-size: 12px; color: #999;">(${Math.floor(Math.random() * 100) + 50} reviews)</span>
+                        </div>
+
+                        <div class="card-actions">
+                            <button class="btn-book" onclick="initiateBooking(${lot.id})">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getAvailabilityStatus(lot) {
+            const percentage = (lot.availableSpaces / lot.totalSpaces) * 100;
+            if (percentage > 50) return 'status-available';
+            if (percentage > 20) return 'status-busy';
+            return 'status-full';
+        }
+
+        function getAmenityEmoji(amenity) {
+            const map = {
+                '24/7 Surveillance': '📹',
+                'EV Charging': '⚡',
+                'Car Wash': '🚗',
+                'Free WiFi': '📶',
+                'Handicap Accessible': '♿',
+                'Shopping Access': '🛍️',
+                'Airport Shuttle': '🚐'
+            };
+            return map[amenity] || '✓';
+        }
+
+        function initiateBooking(lotId) {
+            const lot = parkingLots.find(l => l.id === lotId);
+            currentBooking = lot;
+
+            document.getElementById('bookingSpot').value = lot.name;
+            document.getElementById('summaryEntry').textContent = document.getElementById('entryTime').value || '---';
+            document.getElementById('summaryExit').textContent = document.getElementById('exitTime').value || '---';
+            document.getElementById('summaryRate').textContent = '₹' + lot.hourlyRate + '/hr';
+
+            const entry = document.getElementById('entryTime').value;
+            const exit = document.getElementById('exitTime').value;
+            
+            if (entry && exit) {
+                const hours = calculateHours(entry, exit);
+                const cost = Math.ceil(hours) * lot.hourlyRate;
+                document.getElementById('summaryDuration').textContent = hours.toFixed(1) + ' hours';
+                document.getElementById('summaryTotal').textContent = '₹' + cost;
+            }
+
+            document.getElementById('bookingPanel').classList.add('active');
+            document.getElementById('bookingPanel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function calculateHours(start, end) {
+            const [sh, sm] = start.split(':').map(Number);
+            const [eh, em] = end.split(':').map(Number);
+            return (eh * 60 + em - sh * 60 - sm) / 60;
+        }
+
+        function confirmBooking() {
+            const name = document.getElementById('bookingName').value;
+            const vehicle = document.getElementById('vehicleNo').value;
+            const phone = document.getElementById('bookingPhone').value;
+
+            if (!name || !vehicle || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const booking = {
+                id: Math.random().toString(36).substr(2, 9),
+                lotName: currentBooking.name,
+                vehicle,
+                name,
+                phone,
+                date: document.getElementById('date').value,
+                entryTime: document.getElementById('entryTime').value,
+                exitTime: document.getElementById('exitTime').value,
+                cost: document.getElementById('summaryTotal').textContent
+            };
+
+            alert('✓ Booking Confirmed!\nBooking ID: ' + booking.id + '\n' + booking.cost + ' will be charged.');
+            document.getElementById('bookingPanel').classList.remove('active');
+            document.getElementById('parkingResults').innerHTML = '<div class="empty-state">Booking confirmed! You can proceed to the parking location.</div>';
+        }
+
+        function sortBy(criteria) {
+            const results = document.querySelectorAll('.parking-card');
+            console.log('Sorting by', criteria);
+            alert('Sorted by ' + criteria);
+        }
+
+        // Initialize
+        document.getElementById('entryTime').value = new Date().toTimeString().substr(0, 5);
+        const exitTime = new Date();
+        exitTime.setHours(exitTime.getHours() + 2);
+        document.getElementById('exitTime').value = exitTime.toTimeString().substr(0, 5);
+    </script>
+</body>
+</html>

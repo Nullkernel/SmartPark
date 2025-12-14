@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPark Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .presentation {
+            display: flex;
+            height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .slide-subtitle {
+            font-size: 1.8em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .slide-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .slide-content ul {
+            margin-left: 40px;
+        }
+
+        .slide-content li {
+            margin-bottom: 20px;
+        }
+
+        .slide-content strong {
+            font-weight: 700;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .control-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: white;
+            color: #1e3c72;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid white;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1 class="slide-title">🅿️ SmartPark</h1>
+            <h2 class="slide-subtitle">Intelligent Parking Availability & Booking Interface</h2>
+            <div class="slide-content">
+                <p style="font-size: 1.2em; margin-top: 40px;">Front-End Web Development Laboratory (ACSE04)</p>
+                <p style="font-size: 1.2em;">Institute of Aeronautical Engineering, Hyderabad</p>
+                <p style="font-size: 1.1em; opacity: 0.8; margin-top: 40px;">Solving urban parking challenges through intelligent technology</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide">
+            <h1 class="slide-title">🚗 Urban Parking Crisis</h1>
+            <div class="slide-content">
+                <div class="feature-box">
+                    <p><span class="emoji">⏱️</span><strong>Wasted Time</strong><br>Drivers spend 30+ minutes searching for parking</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">🌍</span><strong>Environmental Impact</strong><br>Unnecessary emissions from prolonged vehicle circulation</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">💰</span><strong>Economic Loss</strong><br>Fuel waste and reduced productivity</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">😤</span><strong>User Frustration</strong><br>Stress and anxiety from parking uncertainty</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide">
+            <h1 class="slide-title">✨ SmartPark Solution</h1>
+            <div class="slide-content">
+                <p style="margin-bottom: 30px;">An intelligent platform connecting drivers with real-time parking information and booking capabilities.</p>
+                <div class="feature-box">
+                    <p><span class="emoji">🗺️</span><strong>Interactive Map Interface</strong> - Visualize parking locations</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">📊</span><strong>Real-Time Availability</strong> - Live space status</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">💵</span><strong>Transparent Pricing</strong> - Clear cost calculations</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">📅</span><strong>Advance Booking</strong> - Reserve spots in advance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Key Features -->
+        <div class="slide">
+            <h1 class="slide-title">🚀 Core Features</h1>
+            <div class="slide-content">
+                <ul>
+                    <li><strong>Location-Based Discovery</strong> - Find parking near you</li>
+                    <li><strong>Real-Time Availability</strong> - Visual space occupancy indicators</li>
+                    <li><strong>Advanced Filtering</strong> - Search by price, amenities, hours</li>
+                    <li><strong>Smart Booking System</strong> - Reserve with date/time selection</li>
+                    <li><strong>Cost Calculation</strong> - Hourly and daily rate comparison</li>
+                    <li><strong>Amenity Indicators</strong> - 24/7 surveillance, EV charging, WiFi</li>
+                    <li><strong>Mobile Responsive</strong> - Perfect on any device</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Architecture -->
+        <div class="slide">
+            <h1 class="slide-title">⚙️ Technical Stack</h1>
+            <div class="slide-content">
+                <div class="two-column">
+                    <div>
+                        <h3 style="font-size: 1.5em; margin-bottom: 20px;">Core Technologies</h3>
+                        <div class="feature-box">
+                            <p><strong>HTML5</strong> - Semantic markup & forms</p>
+                        </div>
+                        <div class="feature-box">
+                            <p><strong>CSS3</strong> - Responsive design & animations</p>
+                        </div>
+                        <div class="feature-box">
+                            <p><strong>JavaScript ES6+</strong> - Interactive functionality</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.5em; margin-bottom: 20px;">Key Features</h3>
+                        <div class="feature-box">
+                            <p><strong>Geolocation</strong> - User positioning</p>
+                        </div>
+                        <div class="feature-box">
+                            <p><strong>LocalStorage</strong> - Data persistence</p>
+                        </div>
+                        <div class="feature-box">
+                            <p><strong>JSON Data</strong> - Parking facility info</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: System Design -->
+        <div class="slide">
+            <h1 class="slide-title">🏗️ System Architecture</h1>
+            <div class="slide-content">
+                <div class="feature-box">
+                    <p><strong>Data Layer</strong><br>Parking lot database with capacity, pricing, amenities</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Logic Layer</strong><br>Filtering, cost calculations, availability updates</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Presentation Layer</strong><br>Map visualization, facility cards, booking interface</p>
+                </div>
+                <p style="margin-top: 30px; font-size: 1.1em;">100% client-side architecture - no backend required!</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Code Implementation -->
+        <div class="slide">
+            <h1 class="slide-title">💻 Implementation</h1>
+            <div class="slide-content">
+                <p style="margin-bottom: 20px;">Cost Calculation Algorithm:</p>
+                <div class="code-block">
+function calculateCost(entry, exit, hourlyRate) {<br/>
+&nbsp;&nbsp;const [eh, em] = exit.split(':').map(Number);<br/>
+&nbsp;&nbsp;const [sh, sm] = entry.split(':').map(Number);<br/>
+&nbsp;&nbsp;const hours = (eh*60 + em - sh*60 - sm) / 60;<br/>
+&nbsp;&nbsp;return Math.ceil(hours) * hourlyRate;<br/>
+}
+                </div>
+                <p style="margin-top: 20px;">Provides accurate cost calculations for user booking decisions</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Challenges -->
+        <div class="slide">
+            <h1 class="slide-title">🛠️ Challenges & Solutions</h1>
+            <div class="slide-content">
+                <div class="feature-box">
+                    <p><strong>Challenge:</strong> Complex State Management<br>
+                    <strong>Solution:</strong> Centralized booking object with unique IDs</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Challenge:</strong> Real-Time Simulation<br>
+                    <strong>Solution:</strong> setInterval with random updates</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Challenge:</strong> Cost Accuracy<br>
+                    <strong>Solution:</strong> Robust date calculations and validation</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Challenge:</strong> Mobile Responsiveness<br>
+                    <strong>Solution:</strong> Mobile-first design with 48px touch targets</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Testing -->
+        <div class="slide">
+            <h1 class="slide-title">✅ Quality Assurance</h1>
+            <div class="slide-content">
+                <div class="feature-box">
+                    <p><strong>Functionality Testing</strong><br>Search, filtering, booking, cost calculations</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Device Testing</strong><br>Desktop, tablet, mobile optimization verified</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Browser Compatibility</strong><br>Chrome, Firefox, Safari, Edge supported</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Accessibility Compliance</strong><br>WCAG 2.1 standards, keyboard navigation</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Course Coverage -->
+        <div class="slide">
+            <h1 class="slide-title">📚 Syllabus Alignment</h1>
+            <div class="slide-content">
+                <ul>
+                    <li><strong>HTML5 Semantic Elements</strong> - header, nav, main, form, section</li>
+                    <li><strong>CSS3 Features</strong> - Grid, Flexbox, media queries, animations</li>
+                    <li><strong>JavaScript Event Handling</strong> - Click, input, change events</li>
+                    <li><strong>DOM Manipulation</strong> - Dynamic element rendering and updates</li>
+                    <li><strong>Responsive Design</strong> - Mobile-first approach with media queries</li>
+                    <li><strong>Form Validation</strong> - Client-side input validation</li>
+                    <li><strong>Data Persistence</strong> - LocalStorage booking management</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11: Future Roadmap -->
+        <div class="slide">
+            <h1 class="slide-title">🚀 Future Enhancements</h1>
+            <div class="slide-content">
+                <div class="feature-box">
+                    <p><strong>Backend Integration</strong> - Real parking sensor data connection</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Mobile App</strong> - Native iOS and Android applications</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>AI/ML</strong> - Availability prediction and demand forecasting</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Payment Integration</strong> - Online payment processing</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>City Expansion</strong> - Multi-city support and integration</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Impact -->
+        <div class="slide">
+            <h1 class="slide-title">🌍 Real-World Impact</h1>
+            <div class="slide-content">
+                <p style="margin-bottom: 30px; font-size: 1.2em;">SmartPark contributes to:</p>
+                <div class="feature-box">
+                    <p><span class="emoji">💚</span><strong>Emission Reduction</strong> - Less time searching = less fuel consumption</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">🚗</span><strong>Traffic Reduction</strong> - Fewer vehicles circulating</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">😊</span><strong>User Experience</strong> - Reduced stress and improved quality of life</p>
+                </div>
+                <div class="feature-box">
+                    <p><span class="emoji">🌆</span><strong>Smart Cities</strong> - IoT-enabled urban infrastructure</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Key Learnings -->
+        <div class="slide">
+            <h1 class="slide-title">💡 Key Takeaways</h1>
+            <div class="slide-content">
+                <div class="feature-box">
+                    <p><strong>Client-Side Sufficiency</strong> - Complex applications don't always need backends</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Responsive Excellence</strong> - Seamless multi-device experiences are achievable</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>User-Centric Design</strong> - Thinking about users first leads to better solutions</p>
+                </div>
+                <div class="feature-box">
+                    <p><strong>Problem-Solving</strong> - Technology can address real-world challenges</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Conclusion -->
+        <div class="slide">
+            <h1 class="slide-title">✨ Conclusion</h1>
+            <div class="slide-content">
+                <p style="font-size: 1.2em; margin-bottom: 30px;">SmartPark demonstrates how front-end web technologies can create practical solutions for urban challenges.</p>
+                <ul>
+                    <li>Comprehensive feature set for real-world use</li>
+                    <li>Professional-grade user interface</li>
+                    <li>Responsive across all devices</li>
+                    <li>Extensible architecture for future growth</li>
+                </ul>
+                <p style="margin-top: 40px; font-size: 1.2em; font-weight: 600;">Making parking smarter, cities cleaner, and users happier</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Thank You -->
+        <div class="slide">
+            <h1 class="slide-title">Thank You!</h1>
+            <div class="slide-content">
+                <p style="font-size: 1.8em; margin-bottom: 30px;">Questions & Discussion</p>
+                <p style="font-size: 1.3em;">Try SmartPark: <span class="highlight">smartpark.local</span></p>
+                <p style="font-size: 1.3em; margin-top: 40px;">Department of CSE (AI&ML)<br>Institute of Aeronautical Engineering</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <div class="control-buttons">
+        <button onclick="previousSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            document.getElementById('currentSlide').textContent = n + 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
