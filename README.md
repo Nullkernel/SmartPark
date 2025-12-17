@@ -155,7 +155,7 @@ Each parking card displays:
 **Roll Number:** 25951A6635  
 **Section:** A  
 **Institution:** Institute of Aeronautical Engineering, Hyderabad  
-**Explanation video link:** [Drive](https://drive.google.com/file/d/1_C7I02KepMX5KM-gpmfbzSD2-UbHap02/view?usp=sharing)
+**Explanation video link:** [Drive](https://drive.google.com/file/d/1KIm2u8nRqkdOoxKOv_gVp5sZFZ6i07r2/view?usp=sharing)
 
 ## 📚 Technologies & Concepts Demonstrated
 
