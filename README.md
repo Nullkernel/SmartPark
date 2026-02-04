@@ -1,24 +1,24 @@
-# SmartPark
+# `SmartPark`
 
-> 🅿️ **Intelligent Parking Availability and Booking Interface**
+>**Intelligent Parking Availability and Booking Interface**
 
-## 📌 Quick Overview
+## Quick Overview
 
-SmartPark is a responsive front-end web application that streamlines urban parking by providing real-time availability information, dynamic pricing comparison, and seamless booking management for parking spaces.
+`SmartPark` is a responsive front-end web application that streamlines urban parking by providing real-time availability information, dynamic pricing comparison, and seamless booking management for parking spaces.
 
-## ✨ Key Features
+## Key Features
 
-- 🅿️ **Real-Time Availability Display** - Shows current available parking spaces and occupancy rates
-- 🗺️ **Interactive Map Interface** - Visual representation of all parking facilities in the area
-- 💰 **Dynamic Price Comparison** - Compare hourly and daily rates across multiple parking lots
-- 🔍 **Smart Search & Filtering** - Filter by location, price range, amenities, and availability
-- 📅 **Complete Booking System** - End-to-end reservation workflow with cost calculation
-- 🎯 **Amenity Filtering** - Find parking with specific amenities (24/7 surveillance, EV charging, WiFi, etc.)
-- 📱 **Fully Responsive Design** - Seamless experience on desktop, tablet, and mobile devices
-- ⭐ **User Ratings & Reviews** - Make informed decisions based on facility ratings
-- ♿ **Accessibility Compliant** - WCAG 2.1 AA standards with full keyboard navigation
+- **Real-Time Availability Display** - Shows current available parking spaces and occupancy rates
+- **Interactive Map Interface** - Visual representation of all parking facilities in the area
+- **Dynamic Price Comparison** - Compare hourly and daily rates across multiple parking lots
+- **Smart Search & Filtering** - Filter by location, price range, amenities, and availability
+- **Complete Booking System** - End-to-end reservation workflow with cost calculation
+- **Amenity Filtering** - Find parking with specific amenities (24/7 surveillance, EV charging, WiFi, etc.)
+- **Fully Responsive Design** - Seamless experience on desktop, tablet, and mobile devices
+- **User Ratings & Reviews** - Make informed decisions based on facility ratings
+- **Accessibility Compliant** - WCAG 2.1 AA standards with full keyboard navigation
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **HTML5** - Semantic structure with form validation
 - **CSS3** - Responsive design with CSS Grid and Flexbox
@@ -26,7 +26,7 @@ SmartPark is a responsive front-end web application that streamlines urban parki
 - **LocalStorage** - Client-side booking and preference storage
 - **Responsive Design APIs** - Mobile-first methodology with media queries
 
-## 🎯 Problem Solved
+## Problem Solved
 
 - ✗ Users waste time searching for available parking spaces
 - ✗ Unclear pricing across different parking facilities
@@ -34,18 +34,18 @@ SmartPark is a responsive front-end web application that streamlines urban parki
 - ✗ No centralized information about parking availability
 - ✗ Traffic congestion from circling for parking
 
-**SmartPark reduces parking search time, saves fuel, lowers emissions, and improves user convenience!**
+**`SmartPark` reduces parking search time, saves fuel, lowers emissions, and improves user convenience!**
 
-## 📊 Learning Outcomes Demonstrated
+## Learning Outcomes Demonstrated
 
-✅ Advanced form design and validation  
-✅ Responsive CSS3 design with Grid and Flexbox  
-✅ Complex JavaScript algorithms and filtering  
-✅ State management and data handling  
-✅ Real-time cost calculations  
-✅ WCAG accessibility compliance  
+Advanced form design and validation  
+	Responsive CSS3 design with Grid and Flexbox  
+	Complex JavaScript algorithms and filtering  
+	 State management and data handling  
+	 Real-time cost calculations  
+	 WCAG accessibility compliance  
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 SmartPark/
@@ -55,7 +55,7 @@ SmartPark/
 └── README.md              # Project documentation
 ```
 
-## 🚀 How to Run
+## How to Run
 
 1. **Open the Application:**
    ```bash
@@ -75,7 +75,7 @@ SmartPark/
    Report.pdf
    ```
 
-## 💡 Features in Detail
+## Features in Detail
 
 ### Advanced Search System
 - Search by location or area name
@@ -107,7 +107,7 @@ Each parking card displays:
 - Daily rate comparison
 - Total cost summary before confirmation
 
-## 🎨 Design Highlights
+## Design Highlights
 
 - Modern gradient background (dark blue theme)
 - Card-based parking facility layout
@@ -118,7 +118,7 @@ Each parking card displays:
 - Comprehensive sidebar search controls
 - Visual availability visualization
 
-## ♿ Accessibility Features
+## Accessibility Features
 
 - WCAG 2.1 AA compliant
 - Full keyboard navigation support
@@ -128,7 +128,7 @@ Each parking card displays:
 - Form validation with clear error messages
 - Focus indicators on all interactive elements
 
-## 📈 Performance
+## Performance
 
 - Client-side processing (no backend required)
 - Fast load times and interactions
@@ -137,7 +137,7 @@ Each parking card displays:
 - Real-time cost calculations
 - Smooth UI responsiveness
 
-## 🔮 Future Enhancement Opportunities
+## Future Enhancement Opportunities
 
 - Backend integration for real-time IoT sensor data
 - Payment processing system
@@ -148,7 +148,7 @@ Each parking card displays:
 - Loyalty rewards program
 - Email booking confirmations
 
-## 👨‍💻 Student Information
+## Student Information
 
 **Course:** ACSE04 - Front-End Web Development  
 **Student:** Amal Bijoy  
@@ -157,7 +157,7 @@ Each parking card displays:
 **Institution:** Institute of Aeronautical Engineering, Hyderabad  
 **Explanation video link:** [Drive](https://drive.google.com/file/d/1KIm2u8nRqkdOoxKOv_gVp5sZFZ6i07r2/view?usp=sharing)
 
-## 📚 Technologies & Concepts Demonstrated
+## Technologies & Concepts Demonstrated
 
 ### Core Concepts
 - Client-side architecture (MVC pattern)
@@ -176,17 +176,17 @@ Each parking card displays:
 - Array method chaining (map, filter, sort)
 - Time parsing and calculations
 
-## ✅ Testing & Quality Assurance
+## Testing & Quality Assurance
 
-- ✅ Tested on Chrome, Firefox, Safari, Edge
-- ✅ Verified on desktop, tablet, mobile devices
-- ✅ WCAG 2.1 AA accessibility verified
-- ✅ All features functional and thoroughly tested
-- ✅ Responsive design confirmed across breakpoints
-- ✅ Cost calculations validated
-- ✅ Booking workflow tested end-to-end
+- Tested on Chrome, Firefox, Safari, Edge
+- Verified on desktop, tablet, mobile devices
+- WCAG 2.1 AA accessibility verified
+- All features functional and thoroughly tested
+- Responsive design confirmed across breakpoints
+- Cost calculations validated
+- Booking workflow tested end-to-end
 
-## 📄 License
+## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
@@ -194,4 +194,4 @@ This project is part of ACSE04 course work at Institute of Aeronautical Engineer
 
 ---
 
-**SmartPark: Making Parking Smart and Efficient! 🚗**
+**`SmartPark`: Making Parking Smart and Efficient!**
